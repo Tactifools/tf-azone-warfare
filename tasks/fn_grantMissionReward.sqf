@@ -78,7 +78,7 @@ private _fnc_updateArsenalWithReward = {
     private _currentItems = missionNamespace getVariable ["active_arsenal_items", []];
     _currentItems append _rewardItems;
     
-    private _updatedArsenal = [[6521.92,4015.99,0], _currentItems, "player_arsenal", "C_IDAP_supplyCrate_F"] call MyFunctions_fnc_updateAceArsenal;
+    private _updatedArsenal = [[13284.9,13751.4,0], _currentItems, "player_arsenal", "C_IDAP_supplyCrate_F"] call MyFunctions_fnc_updateAceArsenal;
     if (!isNull _updatedArsenal) then {
         missionNamespace setVariable ["active_arsenal_items", _currentItems, true];
         diag_log format ["INFO: Updated arsenal with %1", _rewardVar];

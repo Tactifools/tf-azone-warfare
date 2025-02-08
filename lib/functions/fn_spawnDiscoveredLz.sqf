@@ -1,10 +1,9 @@
 /*
-Function: MyFunctions_fnc_spawnDiscoverableLz
+Function: MyFunctions_fnc_spawnDiscoveredLz
 Author: CharlesJohnMcC
 
 Description:
-    Creates a discoverable landing zone with persistent orange smoke that reveals
-    the LZ location when players get within range.
+    Creates a discovered landing zone.
 
 Parameters:
     _position        - Position to create LZ [x,y,z] [Array]
@@ -19,10 +18,10 @@ Returns:
 
 Examples:
     // Basic LZ
-    _lz = [[1000,1000,0], "LZ Alpha", false] call MyFunctions_fnc_spawnDiscoverableLz;
+    _lz = [[1000,1000,0], "LZ Alpha", false] call MyFunctions_fnc_spawnDiscoveredLz;
 
     // LZ with cleared surroundings
-    _lz = [getPos player, "LZ Bravo", true] call MyFunctions_fnc_spawnDiscoverableLz;
+    _lz = [getPos player, "LZ Bravo", true] call MyFunctions_fnc_spawnDiscoveredLz;
 
 Dependencies:
     - MyFunctions_fnc_spawnSmoke
@@ -44,13 +43,13 @@ params [
 ];
 
 if (_position isEqualTo []) exitWith {
-    diag_log "ERROR: Invalid position for discoverable LZ";
+    diag_log "ERROR: Invalid position for discovered LZ";
     objNull
 };
 
 // Ensure LZ creation happens on server
 if (!isServer) exitWith {
-    _this remoteExec ["MyFunctions_fnc_spawnDiscoverableLz", 2];
+    _this remoteExec ["MyFunctions_fnc_spawnDiscoveredLz", 2];
     objNull
 };
 
@@ -74,30 +73,7 @@ private _markerId = format ["lz_%1", floor random 99999];
 private _marker = createMarker [_markerId, _position];
 _marker setMarkerType "mil_pickup";
 _marker setMarkerColor "ColorYellow";
-_marker setMarkerAlpha 0;
+_marker setMarkerAlpha 100;
 _marker setMarkerText _markerName;
-
-// Create persistent smoke with correct variable name
-private _smokeVarName = format ["lzSmoke_%1", _markerId];
-[_position, "ORANGE", true, _smokeVarName] call MyFunctions_fnc_spawnSmoke;
-
-// Make sure trigger is created on server and synced
-private _trigger = [
-	_markerId + "Trigger",
-	_position,
-	[30,30],
-	"WEST",
-	"PRESENT",
-	"this",
-	format [
-        "
-        ['%1'] remoteExec ['MyFunctions_fnc_deleteSmoke', 2];
-        '%2' setMarkerAlpha 1;
-        ['LZ Location Discovered'] call MyFunctions_fnc_sendGlobalChatMessage;
-        ",
-        _smokeVarName,
-        _markerId
-    ]
-] call MyFunctions_fnc_createTrigger;
 
 _lzObject

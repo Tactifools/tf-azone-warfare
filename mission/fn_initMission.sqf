@@ -86,7 +86,7 @@ diag_log "INFO: Calling MyFunctions_fnc_initMissionVariables";
     };
 
     diag_log format ["INFO: Base arsenal items: %1", _baseArsenalItems];
-    [[6521.92,4015.99,0], _baseArsenalItems, "player_arsenal", "C_IDAP_supplyCrate_F"] call MyFunctions_fnc_spawnLimitedAceArsenal;
+    [[13284.9,13751.4,0], _baseArsenalItems, "player_arsenal", "C_IDAP_supplyCrate_F"] call MyFunctions_fnc_spawnLimitedAceArsenal;
     missionNamespace setVariable ["active_arsenal_items", _baseArsenalItems, true];
 
     // Log arsenal initialization
@@ -135,14 +135,32 @@ diag_log "INFO: Calling MyFunctions_fnc_initMissionVariables";
     // Log task initialization
     diag_log "INFO: Parent tasks initialized";
 
+    private _discoveredLzs = [
+        [[10616.3,13245.2,0], "Alpha 1",true],
+        [[14348.5,8497.76,0], "Bravo 1", false],
+        [[8174.43,13554,0], "Charlie 1",true]
+    ];
+
+    {
+        _x call MyFunctions_fnc_spawnDiscoveredLz;
+    } forEach _discoveredLzs;
+
     private _discoverableLzs = [
-        [[6499.54,3900.97,0], "Alpha 1",false],
-        [[6500.27,4099.97,0], "Bravo 1", true]
+        [[10920.2,12813.6,0], "Alpha 2",true],
+        [[11072.7,11507.5,0], "Alpha 3",false],
+        [[10632.3,11047.5,0], "Alpha 4",true],
+        [[13341.4,8309.8,0], "Bravo 2", true],
+        [[12815.5,9415.87,0], "Bravo 3", true],
+        [[12405.1,9635.58,0], "Bravo 4", true],
+        [[8344.72,12810.3,0], "Charlie 2",true],
+        [[8119.9,11976.7,0], "Charlie 3",false],
+        [[8481.96,10703.8,0], "Charlie 4",false]
     ];
 
     {
         _x call MyFunctions_fnc_spawnDiscoverableLz;
     } forEach _discoverableLzs;
+
 
     // Log LZ initialization
     diag_log "INFO: Discoverable LZs initialized";

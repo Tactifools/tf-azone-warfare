@@ -108,4 +108,9 @@ class CommonFunctions {
         description = "Creates a discoverable landing zone with smoke signal and hidden marker";
         example = "[[0,0,0], 'Alpha 1', false] call MyFunctions_fnc_spawnDiscoverableLz;";
     };
+
+    class spawnDiscoveredLz {
+        description = "Creates a discovered landing zone with visible marker";
+        example = "[[0,0,0], 'Alpha 1', false] call MyFunctions_fnc_spawnDiscoveredLz;";
+    };
 };
