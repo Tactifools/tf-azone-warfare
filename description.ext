@@ -1,0 +1,66 @@
+/*
+ * Mission Description Configuration
+ * Author: CharlesJohnMcC
+ * 
+ * Description:
+ * Defines core mission parameters, respawn settings, and framework configurations.
+ * 
+ * Settings:
+ * - respawnOnStart: -1 (Disable respawn on start)
+ * - respawn: Values available:
+ *   0 = NONE - No respawn
+ *   1 = BIRD - Spectator camera
+ *   2 = INSTANT - Respawn where died
+ *   3 = BASE - Respawn at marker
+ *   4 = GROUP - Respawn near group
+ *   5 = SIDE - Respawn near side units
+ * - respawnDelay: 5 seconds
+ * - respawnDialog: 0 (Disable default respawn dialog)
+ * 
+ * Mission Parameters:
+ * - gameType: Sandbox
+ * - minPlayers: 1
+ * - maxPlayers: 20
+ * 
+ * Framework Integration:
+ * - CBA Settings enabled
+ * - Dynamic Simulation enabled
+ * 
+ * Dependencies:
+ * - CBA_A3
+ * - ACE3
+ */
+
+class CfgFunctions 
+{
+    #include "cfgFunctions.hpp"
+};
+
+// Respawn Configuration
+respawnOnStart = -1;  // Disable respawn on start
+respawn = 3;         // BASE respawn type
+respawnDelay = 5;    // 5 second delay
+respawnDialog = 0;   // Disable default dialog
+
+// Mission Header
+class Header
+{
+    gameType = Sandbox;
+    minPlayers = 1;
+    maxPlayers = 20;
+};
+
+// Framework Settings
+cba_settings_hasSettingsFile = 1;    // Enable CBA settings
+enableDynamicSimulation = 1;         // Enable performance optimization
+
+// Add these settings
+disabledAI = 1;                  // Disable AI for player slots
+joinUnassigned = 1;             // Don't auto-assign roles
+skipLobby = 0;                  // Don't skip lobby
+allowFunctionsRecompile = 0;    // Disable function recompiling on live server
+
+// Add these crucial settings
+allowFunctionsLog = 1;          // Enable function logging
+briefing = 1;                   // Enable briefing
+debriefing = 1;                // Enable debriefing
